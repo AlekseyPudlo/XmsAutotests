@@ -12,7 +12,7 @@ public class LoginPage extends BasePageObject {
     private By passwordTextBox_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[2]/input[1]");
     private By loginButton_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/button[1]");
     private By loginErrorMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
-    private By specifyCreentialsMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
+    private By specifyCredentialsMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
 
     public LoginPage(WebDriver driver) {
 	    super(driver);
@@ -53,7 +53,6 @@ public class LoginPage extends BasePageObject {
     }
 
     public String getErrorMessageTest() {
-
         try {
             return driver.findElement(loginErrorMessage_Locator).getText();
         } catch (NoSuchElementException e) {
@@ -90,6 +89,6 @@ public class LoginPage extends BasePageObject {
     }
 
     public boolean checkIfSpecifyCredentialsMessageIsPresented() {
-        return isElementOnPage(specifyCreentialsMessage_Locator);
+        return isElementOnPage(specifyCredentialsMessage_Locator);
     }
 }

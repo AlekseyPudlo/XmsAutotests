@@ -7,6 +7,9 @@ import com.xio.dellemc.automation.testcases.BaseTestTemplate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
+
 /**
  * Created by OPudlo on 29.03.2017.
  */
@@ -17,12 +20,12 @@ public class LogInTests extends BaseTestTemplate {
     @Test(groups = "Login Tests Group")
     public void testLoginPageElementsVerification() {
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.checkIfLoginBoxIsPresented());
-        Assert.assertTrue(loginPage.checkIfUserNameFieldIsPresented());
-        Assert.assertTrue(loginPage.checkIfPasswordFieldIsPresented());
-        Assert.assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
-        Assert.assertTrue(loginPage.checkIfLoginButtonIsPresented());
-        Assert.assertTrue(loginPage.checkIfLogInButtonIsDisabled());
+        assertTrue(loginPage.checkIfLoginBoxIsPresented());
+        assertTrue(loginPage.checkIfUserNameFieldIsPresented());
+        assertTrue(loginPage.checkIfPasswordFieldIsPresented());
+        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        assertTrue(loginPage.checkIfLoginButtonIsPresented());
+        assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testLoginPageElementsVerification")
@@ -33,9 +36,9 @@ public class LogInTests extends BaseTestTemplate {
                 .typePassword(Credentials.PASSWORD_WRONG)
                 .waitForLoginButtonEnabled(2);
 
-        Assert.assertTrue(loginPage.checkIfLogInButtonEnabled());
+        assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
+        assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testSignInNegativePassword")
@@ -43,7 +46,7 @@ public class LogInTests extends BaseTestTemplate {
         LoginPage loginPage = new LoginPage(driver);
 
         // This assertion checks that user name field value still present in field after previous test execution
-        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME);
+        assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME);
 
         loginPage
                 .cleanUserNameField()
@@ -52,9 +55,9 @@ public class LogInTests extends BaseTestTemplate {
                 .typePassword(Credentials.PASSWORD)
                 .waitForLoginButtonEnabled(2);
 
-        Assert.assertTrue(loginPage.checkIfLogInButtonEnabled());
+        assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
+        assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testSignInNegativeUserName")
@@ -62,14 +65,14 @@ public class LogInTests extends BaseTestTemplate {
         LoginPage loginPage = new LoginPage(driver);
 
         // This assertion checks that user name field value still present in field after previous test execution
-        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
+        assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
 
         loginPage
                 .cleanUserNameField()
                 .cleanPasswordField();
 
-        Assert.assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
-        Assert.assertTrue(loginPage.checkIfLogInButtonIsDisabled());
+        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testDisableLogInButtonOption")
@@ -77,7 +80,7 @@ public class LogInTests extends BaseTestTemplate {
         LoginPage loginPage = new LoginPage(driver);
         NavigationBarModule navigationBar = new NavigationBarModule(driver);
 
-        Assert.assertEquals(loginPage.getUserNameFieldText(), "");
+        assertEquals(loginPage.getUserNameFieldText(), "");
 
         loginPage
                 .cleanUserNameField()
@@ -86,7 +89,7 @@ public class LogInTests extends BaseTestTemplate {
                 .typePassword(Credentials.PASSWORD)
                 .waitForLoginButtonEnabled(2);
 
-        Assert.assertTrue(loginPage.checkIfLogInButtonEnabled());
+        assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
         Assert.assertTrue(navigationBar.isNavigationBarPresent());
     }

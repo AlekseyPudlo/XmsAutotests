@@ -30,6 +30,11 @@ public class BasePageObject {
         return String.valueOf(timeCurrent);
     }
 
+    // Returns current driver object
+    protected WebDriver getDriverObject() {
+        return this.driver;
+    }
+
     // Method returns String value from an inner field element using JavaScript
     protected String getInnerFieldText(By by) {
         webElement = driver.findElement(by);
@@ -65,6 +70,15 @@ public class BasePageObject {
     protected boolean isElementDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    // Method to check if WebElement is displayed on the page
+    protected boolean isElementDisplayed(By by) {
+        try {
+            return driver.findElement(by).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
