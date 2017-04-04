@@ -21,6 +21,7 @@ public class LogInTests extends BaseTestTemplate {
         Assert.assertTrue(loginPage.checkIfUserNameTestBoxPresented());
         Assert.assertTrue(loginPage.checkIfPasswordTextBoxPresented());
         Assert.assertTrue(loginPage.checkIfLoginButtonPresented());
+        Assert.assertTrue(loginPage.checkIfLogInButtonDisabled());
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testLoginPageElementsVerification")
@@ -28,7 +29,7 @@ public class LogInTests extends BaseTestTemplate {
         LoginPage loginPage = new LoginPage(driver);
         loginPage
                 .typeUserName(Credentials.USERNAME)
-                .typePassword("Wrong Password")
+                .typePassword(Credentials.PASSWORD_WRONG)
                 .waitForLoginButtonEnabled(2);
 
         Assert.assertTrue(loginPage.checkIfLogInButtonEnabled());
@@ -40,15 +41,13 @@ public class LogInTests extends BaseTestTemplate {
     public void testSignInNegativeUserName() {
         LoginPage loginPage = new LoginPage(driver);
 
-        // Debug part of code
-        System.out.println("Login Page get User Name field text value = " + loginPage.getUserNameFieldText());
         // This assertion checks that user name field value still present in field after previous test execution
-        Assert.assertEquals(loginPage.getUserNameFieldText(), "admin");
+        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME);
 
         loginPage
                 .cleanUserNameField()
                 .cleanPasswordField()
-                .typeUserName("WrongUserName")
+                .typeUserName(Credentials.USERNAME_WRONG)
                 .typePassword(Credentials.PASSWORD)
                 .waitForLoginButtonEnabled(2);
 
@@ -63,7 +62,7 @@ public class LogInTests extends BaseTestTemplate {
         NavigationBarModule navigationBar = new NavigationBarModule(driver);
 
         // This assertion checks that user name field value still present in field after previous test execution
-        Assert.assertEquals(loginPage.getUserNameFieldText(), "WrongUserName");
+        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
 
         loginPage
                 .cleanUserNameField()

@@ -7,11 +7,12 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePageObject {
 
-    private By loginBox_Locator = By.xpath("html/body/div[3]/login-box/div/div");
-    private By usernameField_Locator = By.xpath("html/body/div[3]/login-box/div/div/div[2]/div[1]/form/fieldset/div[1]/input");
-    private By passwordTextBox_Locator = By.xpath("html/body/div[3]/login-box/div/div/div[2]/div[1]/form/fieldset/div[2]/input");
-    private By loginButton_Locator = By.xpath("html/body/div[3]/login-box/div/div/div[2]/div[1]/form/fieldset/button");
-    private By loginErrorMessage_Locator = By.xpath("/html/body/div[3]/login-box/div/div/div[2]/div[1]/form/fieldset/div[3]/div");
+    private By loginBox_Locator = By.xpath("/html/body/div[3]/login-box[1]/div[1]/div[1]");
+    private By usernameField_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[1]/input[1]");
+    private By passwordTextBox_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[2]/input[1]");
+    private By loginButton_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/button[1]");
+    private By loginErrorMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
+    private By specifyCreentialsMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
 
     public LoginPage(WebDriver driver) {
 	    super(driver);
@@ -61,7 +62,6 @@ public class LoginPage extends BasePageObject {
     }
 
     public String getUserNameFieldText() {
-//        return driver.findElement(usernameField_Locator).getText();
         return getInnerFieldText(usernameField_Locator);
     }
 
@@ -79,6 +79,10 @@ public class LoginPage extends BasePageObject {
 
     public boolean checkIfLogInButtonEnabled() {
         return isElementEnabled(loginButton_Locator);
+    }
+
+    public boolean checkIfLogInButtonDisabled() {
+        return !isElementEnabled(loginButton_Locator);
     }
 
     public boolean checkIfLoginButtonPresented() {
