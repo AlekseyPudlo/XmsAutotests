@@ -17,11 +17,12 @@ public class LogInTests extends BaseTestTemplate {
     @Test(groups = "Login Tests Group")
     public void testLoginPageElementsVerification() {
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertTrue(loginPage.checkIfLoginBoxPresented());
-        Assert.assertTrue(loginPage.checkIfUserNameTestBoxPresented());
-        Assert.assertTrue(loginPage.checkIfPasswordTextBoxPresented());
-        Assert.assertTrue(loginPage.checkIfLoginButtonPresented());
-        Assert.assertTrue(loginPage.checkIfLogInButtonDisabled());
+        Assert.assertTrue(loginPage.checkIfLoginBoxIsPresented());
+        Assert.assertTrue(loginPage.checkIfUserNameFieldIsPresented());
+        Assert.assertTrue(loginPage.checkIfPasswordFieldIsPresented());
+        Assert.assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        Assert.assertTrue(loginPage.checkIfLoginButtonIsPresented());
+        Assert.assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testLoginPageElementsVerification")
@@ -57,12 +58,26 @@ public class LogInTests extends BaseTestTemplate {
     }
 
     @Test(groups = "Login Tests Group", dependsOnMethods = "testSignInNegativeUserName")
+    public void testDisableLogInButtonOption() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        // This assertion checks that user name field value still present in field after previous test execution
+        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
+
+        loginPage
+                .cleanUserNameField()
+                .cleanPasswordField();
+
+        Assert.assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        Assert.assertTrue(loginPage.checkIfLogInButtonIsDisabled());
+    }
+
+    @Test(groups = "Login Tests Group", dependsOnMethods = "testDisableLogInButtonOption")
     public void testSignInPositiveAction() {
         LoginPage loginPage = new LoginPage(driver);
         NavigationBarModule navigationBar = new NavigationBarModule(driver);
 
-        // This assertion checks that user name field value still present in field after previous test execution
-        Assert.assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
+        Assert.assertEquals(loginPage.getUserNameFieldText(), "");
 
         loginPage
                 .cleanUserNameField()

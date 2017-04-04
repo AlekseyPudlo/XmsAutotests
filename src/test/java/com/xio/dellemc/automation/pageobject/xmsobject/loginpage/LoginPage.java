@@ -65,15 +65,15 @@ public class LoginPage extends BasePageObject {
         return getInnerFieldText(usernameField_Locator);
     }
 
-    public boolean checkIfLoginBoxPresented() {
+    public boolean checkIfLoginBoxIsPresented() {
         return isElementOnPage(loginBox_Locator);
     }
 
-    public boolean checkIfUserNameTestBoxPresented() {
+    public boolean checkIfUserNameFieldIsPresented() {
         return isElementOnPage(usernameField_Locator);
     }
 
-    public boolean checkIfPasswordTextBoxPresented() {
+    public boolean checkIfPasswordFieldIsPresented() {
         return isElementOnPage(passwordTextBox_Locator);
     }
 
@@ -81,13 +81,15 @@ public class LoginPage extends BasePageObject {
         return isElementEnabled(loginButton_Locator);
     }
 
-    public boolean checkIfLogInButtonDisabled() {
+    public boolean checkIfLogInButtonIsDisabled() {
         return !isElementEnabled(loginButton_Locator);
     }
 
-    public boolean checkIfLoginButtonPresented() {
+    public boolean checkIfLoginButtonIsPresented() {
         return isElementOnPage(loginButton_Locator);
     }
 
-
+    public boolean checkIfSpecifyCredentialsMessageIsPresented() {
+        return isElementOnPage(specifyCreentialsMessage_Locator);
+    }
 }
