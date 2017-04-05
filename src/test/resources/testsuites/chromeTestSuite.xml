@@ -5,7 +5,8 @@
     <parameter name="browser" value="chrome"/>
     <test name="Chrome Test">
         <classes>
-          <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests">
+          <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"></class>
+          <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests">
             <!--<methods>-->
                 <!--<include name="logInLogOutTest" />-->
             <!--</methods>-->

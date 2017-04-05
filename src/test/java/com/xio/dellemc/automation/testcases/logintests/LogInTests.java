@@ -13,9 +13,8 @@ import static org.testng.AssertJUnit.assertTrue;
 /**
  * Created by OPudlo on 29.03.2017.
  */
-@Test
-public class LogInTests extends BaseTestTemplate {
 
+public class LogInTests extends BaseTestTemplate {
 
     @Test(groups = "Login Tests Group")
     public void testLoginPageElementsVerification() {

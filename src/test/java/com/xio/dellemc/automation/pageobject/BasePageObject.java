@@ -20,7 +20,7 @@ public class BasePageObject {
 
     public BasePageObject(WebDriver driver) {
         this.driver = driver;
-        this.wait = new Wait(this.driver);
+        this.wait = new Wait(driver);
     }
 
     // Method returns a current timestamp
@@ -28,6 +28,11 @@ public class BasePageObject {
         Date time = new Date();
         long timeCurrent = time.getTime();
         return String.valueOf(timeCurrent);
+    }
+
+    // Returns current URL
+    public String getUrl(){
+        return driver.getCurrentUrl();
     }
 
     // Returns current driver object

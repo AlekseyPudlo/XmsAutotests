@@ -5,6 +5,7 @@ import com.xio.dellemc.automation.common.core.Credentials;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ThreadGuard;
 import org.testng.annotations.*;
 
 /**
@@ -22,10 +23,10 @@ public class BaseTestTemplate {
         // Create a new instance of Chrome / FireFox Driver
         if(browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", new CommonBrowserPath().getFirefoxDriverPath().getAbsolutePath());
-            driver = new FirefoxDriver();
+            driver = ThreadGuard.protect(new FirefoxDriver());
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", new CommonBrowserPath().getChromeDriverPath().getAbsolutePath());
-            driver = new ChromeDriver();
+            driver = ThreadGuard.protect(new ChromeDriver());
         }
     }
 
@@ -36,8 +37,13 @@ public class BaseTestTemplate {
 
         setDriverForBrowser(browser);
         driver.manage().window().maximize();
-        driver.get(Credentials.URL);
+        driver.get(Credentials.BASE_URL);
 }
+
+//    @BeforeTest(alwaysRun = true)
+//    public void beforeTest(){
+//
+//    }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
