@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="ChromeTestSuite" verbose="1">
+<suite name="ChromeTestSuite" verbose="10"> <!--thread-count="1" parallel="tests"-->
     <parameter name="browser" value="chrome"/>
     <test name="Chrome Test">
         <classes>
-          <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"></class>
-          <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests">
-            <!--<methods>-->
-                <!--<include name="logInLogOutTest" />-->
-            <!--</methods>-->
+            <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"></class>
+            <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests">
+            <!--<methods>
+                <include name="logInLogOutTest" />
+            </methods>-->
           </class>
         </classes>
     </test> <!-- Test -->

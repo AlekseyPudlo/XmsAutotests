@@ -40,11 +40,6 @@ public class BaseTestTemplate {
         driver.get(Credentials.BASE_URL);
 }
 
-//    @BeforeTest(alwaysRun = true)
-//    public void beforeTest(){
-//
-//    }
-
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
         driver.quit();
