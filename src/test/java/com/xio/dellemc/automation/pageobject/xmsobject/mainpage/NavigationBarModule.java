@@ -30,46 +30,41 @@ public class NavigationBarModule extends BasePageObject {
         return this;
     }
 
-    public boolean isNavigationBarPresent(){
-        wait.forElementVisible(navigationToolBar_Locator, 10, 250);
-        return driver.findElement(navigationToolBar_Locator).isDisplayed();
-    }
-
-    public boolean isSystemSettingsContextIsDisplayed() {
-        return isElementDisplayed(systemSettingsContext_Locator);
-    }
-
-    public NavigationBarModule callSystemSettingsContext() {
+    public NavigationBarModule callingSystemSettingsContext() {
         driver.findElement(systemSettingsMenuItem_Locator).click();
         return this;
     }
 
-    public NavigationBarModule goToNasSettings() {
-        if(isSystemSettingsContextIsDisplayed()) {
-            driver.findElement(nasSettingsBttn_Locator).click();
-            return this;
-        } else {
-            callSystemSettingsContext();
+    public NasSettingsModule goToNasSettings() {
+        waitForNavigationBarPresence(10, 250);
+        if(!isSystemSettingsContextDisplayed()) {
+            callingSystemSettingsContext();
             waitForSystemSettingsContext(2);
-            driver.findElement(nasSettingsBttn_Locator).click();
-            return this;
         }
+        driver.findElement(nasSettingsBttn_Locator).click();
+        return new NasSettingsModule(driver);
     }
 
-    public NavigationBarModule goToNasMaintenance() {
-        if(isSystemSettingsContextIsDisplayed()) {
-            driver.findElement(nasMaintenanceBttn_Locator).click();
-            return this;
-        } else {
-            callSystemSettingsContext();
+    public  NasMaintenanceModule goToNasMaintenance() {
+        if(!isSystemSettingsContextDisplayed()) {
+            callingSystemSettingsContext();
             waitForSystemSettingsContext(2);
-            driver.findElement(nasMaintenanceBttn_Locator).click();
-            return this;
         }
+        driver.findElement(nasMaintenanceBttn_Locator).click();
+        return new NasMaintenanceModule(driver);
     }
 
+    public void waitForNavigationBarPresence(int timeout, int pooling) {
+        wait.forElementVisible(navigationToolBar_Locator, timeout, pooling);
+    }
 
+    public boolean isNavigationBarPresent(){
+        waitForNavigationBarPresence(10, 250);
+        return driver.findElement(navigationToolBar_Locator).isDisplayed();
+    }
 
-
+    public boolean isSystemSettingsContextDisplayed() {
+        return isElementDisplayed(systemSettingsContext_Locator);
+    }
 
 }
