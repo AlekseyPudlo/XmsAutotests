@@ -2,7 +2,6 @@ package com.xio.dellemc.automation.pageobject;
 
 import com.xio.dellemc.automation.common.core.Wait;
 import org.openqa.selenium.*;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -28,11 +27,6 @@ public class BasePageObject {
         Date time = new Date();
         long timeCurrent = time.getTime();
         return String.valueOf(timeCurrent);
-    }
-
-    // Returns current URL
-    public String getUrl(){
-        return driver.getCurrentUrl();
     }
 
     // Returns current driver object

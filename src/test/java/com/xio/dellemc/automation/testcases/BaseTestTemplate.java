@@ -30,6 +30,7 @@ public class BaseTestTemplate {
         }
     }
 
+    /*
     @Parameters({ "browser" })
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(@Optional String browser) {
@@ -38,11 +39,29 @@ public class BaseTestTemplate {
         setDriverForBrowser(browser);
         driver.manage().window().maximize();
         driver.get(Credentials.BASE_URL);
-}
+    }
+*/
+
+    @Parameters({ "browser" })
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass(@Optional String browser) {
+        System.out.println("Browser = " + browser);
+
+        setDriverForBrowser(browser);
+        driver.manage().window().maximize();
+        driver.get(Credentials.BASE_URL);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+        driver.quit();
+    }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {
-        driver.quit();
+        if (!(driver == null)) {
+            driver.quit();
+        }
     }
 }
 
