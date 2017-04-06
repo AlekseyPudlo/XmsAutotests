@@ -3,14 +3,30 @@
 
 <suite name="ChromeTestSuite" verbose="10"> <!--thread-count="1" parallel="tests"-->
     <parameter name="browser" value="chrome"/>
-    <test name="Chrome Test">
+    <test name="Chrome LogIn Tests">
+        <groups>
+            <run>
+                <include name="Login Tests Group"/>
+            </run>
+        </groups>
         <classes>
-            <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"></class>
-            <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests">
+            <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"/>
             <!--<methods>
                 <include name="logInLogOutTest" />
             </methods>-->
-          </class>
+        </classes>
+    </test> <!-- Test -->
+    <test name="Chrome NAS Settings Test">
+        <groups>
+            <run>
+                <include name="NAS Settings Tests Group"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests"/>
+                <!--<methods>
+                    <include name="logInLogOutTest" />
+                </methods>-->
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

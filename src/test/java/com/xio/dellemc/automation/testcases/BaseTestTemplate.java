@@ -30,7 +30,6 @@ public class BaseTestTemplate {
         }
     }
 
-    /*
     @Parameters({ "browser" })
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(@Optional String browser) {
@@ -40,8 +39,8 @@ public class BaseTestTemplate {
         driver.manage().window().maximize();
         driver.get(Credentials.BASE_URL);
     }
-*/
 
+/*
     @Parameters({ "browser" })
     @BeforeClass(alwaysRun = true)
     public void beforeClass(@Optional String browser) {
@@ -56,6 +55,7 @@ public class BaseTestTemplate {
     public void afterClass() {
         driver.quit();
     }
+*/
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() {

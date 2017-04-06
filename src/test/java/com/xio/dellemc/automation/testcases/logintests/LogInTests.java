@@ -16,7 +16,7 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class LogInTests extends BaseTestTemplate {
 
-    @Test(groups = "Login Tests Group")
+    @Test(groups = { "Login Tests Group" })
     public void testLoginPageElementsVerification() {
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.checkIfLoginBoxIsPresented());
@@ -27,7 +27,7 @@ public class LogInTests extends BaseTestTemplate {
         assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
-    @Test(groups = "Login Tests Group", dependsOnMethods = "testLoginPageElementsVerification")
+    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testLoginPageElementsVerification")
     public void testSignInNegativePassword() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage
@@ -40,7 +40,7 @@ public class LogInTests extends BaseTestTemplate {
         assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
     }
 
-    @Test(groups = "Login Tests Group", dependsOnMethods = "testSignInNegativePassword")
+    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testSignInNegativePassword")
     public void testSignInNegativeUserName() {
         LoginPage loginPage = new LoginPage(driver);
 
@@ -59,7 +59,7 @@ public class LogInTests extends BaseTestTemplate {
         assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
     }
 
-    @Test(groups = "Login Tests Group", dependsOnMethods = "testSignInNegativeUserName")
+    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testSignInNegativeUserName")
     public void testDisableLogInButtonOption() {
         LoginPage loginPage = new LoginPage(driver);
 
@@ -74,7 +74,7 @@ public class LogInTests extends BaseTestTemplate {
         assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
-    @Test(groups = "Login Tests Group", dependsOnMethods = "testDisableLogInButtonOption")
+    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testDisableLogInButtonOption")
     public void testSignInPositiveAction() {
         LoginPage loginPage = new LoginPage(driver);
         NavigationBarModule navigationBar = new NavigationBarModule(driver);
