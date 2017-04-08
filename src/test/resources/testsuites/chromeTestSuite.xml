@@ -11,18 +11,6 @@
         </groups>
         <classes>
             <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"/>
-            <!--<methods>
-                <include name="logInLogOutTest" />
-            </methods>-->
-        </classes>
-    </test> <!-- Test -->
-    <test name="Chrome NAS Settings Test">
-        <groups>
-            <run>
-                <include name="NAS Settings Tests Group"/>
-            </run>
-        </groups>
-        <classes>
             <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests"/>
                 <!--<methods>
                     <include name="logInLogOutTest" />
