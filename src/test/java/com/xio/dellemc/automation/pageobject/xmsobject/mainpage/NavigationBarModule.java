@@ -1,6 +1,7 @@
 package com.xio.dellemc.automation.pageobject.xmsobject.mainpage;
 
 import com.xio.dellemc.automation.pageobject.BasePageObject;
+import com.xio.dellemc.automation.pageobject.xmsobject.nassettingspage.NasSettingsModule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,7 +32,7 @@ public class NavigationBarModule extends BasePageObject {
     }
 
     public NavigationBarModule callingSystemSettingsContext() {
-        driver.findElement(systemSettingsMenuItem_Locator).click();
+        clickOnElement(systemSettingsMenuItem_Locator);
         return this;
     }
 
@@ -41,7 +42,7 @@ public class NavigationBarModule extends BasePageObject {
             callingSystemSettingsContext();
             waitForSystemSettingsContext(2);
         }
-        driver.findElement(nasSettingsBttn_Locator).click();
+        clickOnElement(nasSettingsBttn_Locator);
         return new NasSettingsModule(driver);
     }
 
@@ -50,7 +51,7 @@ public class NavigationBarModule extends BasePageObject {
             callingSystemSettingsContext();
             waitForSystemSettingsContext(2);
         }
-        driver.findElement(nasMaintenanceBttn_Locator).click();
+        clickOnElement(nasMaintenanceBttn_Locator);
         return new NasMaintenanceModule(driver);
     }
 

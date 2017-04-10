@@ -118,6 +118,10 @@ public class BasePageObject {
         }
     }
 
+    protected void clickOnElement(By by) {
+        driver.findElement(by).click();
+    }
+
     // Method's name speaks for itself
     public void refreshPage() {
         try {

@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePageObject {
 
-    private By loginBox_Locator = By.xpath("/html/body/div[3]/login-box[1]/div[1]/div[1]");
-    private By usernameField_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[1]/input[1]");
-    private By passwordTextBox_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[2]/input[1]");
-    private By loginButton_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/button[1]");
-    private By loginErrorMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
-    private By specifyCredentialsMessage_Locator = By.xpath("//form[@name=\"$ctrl.loginForm\"]/fieldset[1]/div[3]/div[1]");
+    private By loginBox_Locator = By.xpath("//div[contains(text(),  'XtremIO Management')]");
+    private By usernameField_Locator = By.xpath("//input[contains(@placeholder, 'Username')]");
+    private By passwordField_Locator = By.xpath("//input[contains(@placeholder, 'Password')]");
+    private By loginButton_Locator = By.xpath("//button[contains(text(), 'Login')]");
+    private By loginFailedMessage_Locator = By.xpath("//div[contains(text(), 'User authentication failed')]");
+    private By specifyCredentialsMessage_Locator = By.xpath("//div[contains(text(), 'Specify username and password')]");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -36,7 +36,7 @@ public class LoginPage extends BasePageObject {
     }
 
     public LoginPage typePassword(String password) {
-	    driver.findElement(passwordTextBox_Locator).sendKeys(password);
+	    driver.findElement(passwordField_Locator).sendKeys(password);
 	    return this;
     }
 
@@ -46,7 +46,7 @@ public class LoginPage extends BasePageObject {
     }
 
     public LoginPage clickOnLoginButton() {
-        driver.findElement(loginButton_Locator).click();
+        clickOnElement(loginButton_Locator);
         return this;
     }
 
@@ -56,20 +56,16 @@ public class LoginPage extends BasePageObject {
     }
 
     public LoginPage cleanPasswordField() {
-        clearFieldFromText(passwordTextBox_Locator);
+        clearFieldFromText(passwordField_Locator);
         return this;
     }
 
     public String getErrorMessageTest() {
         try {
-            return driver.findElement(loginErrorMessage_Locator).getText();
+            return driver.findElement(loginFailedMessage_Locator).getText();
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException("There is no \"Error message\" element on the page.");
         }
-    }
-
-    public String getUserNameFieldText() {
-        return getInnerFieldText(usernameField_Locator);
     }
 
     public boolean checkIfLoginBoxIsPresented() {
@@ -81,7 +77,7 @@ public class LoginPage extends BasePageObject {
     }
 
     public boolean checkIfPasswordFieldIsPresented() {
-        return isElementOnPage(passwordTextBox_Locator);
+        return isElementOnPage(passwordField_Locator);
     }
 
     public boolean checkIfLogInButtonEnabled() {
@@ -96,7 +92,7 @@ public class LoginPage extends BasePageObject {
         return isElementOnPage(loginButton_Locator);
     }
 
-    public boolean checkIfSpecifyCredentialsMessageIsPresented() {
+    public boolean checkIfSpecifyCredentialsMessageIsPresent() {
         return isElementOnPage(specifyCredentialsMessage_Locator);
     }
 }

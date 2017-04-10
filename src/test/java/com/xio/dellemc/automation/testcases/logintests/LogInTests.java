@@ -4,7 +4,6 @@ import com.xio.dellemc.automation.common.core.Credentials;
 import com.xio.dellemc.automation.pageobject.xmsobject.loginpage.LoginPage;
 import com.xio.dellemc.automation.pageobject.xmsobject.mainpage.NavigationBarModule;
 import com.xio.dellemc.automation.testcases.BaseTestTemplate;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -16,36 +15,35 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class LogInTests extends BaseTestTemplate {
 
-    @Test(groups = { "Login Tests Group" })
+    @Test(groups = { "Login Positive Tests Group" }, priority = 1)
     public void testLoginPageElementsVerification() {
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.checkIfLoginBoxIsPresented());
         assertTrue(loginPage.checkIfUserNameFieldIsPresented());
         assertTrue(loginPage.checkIfPasswordFieldIsPresented());
-        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresent());
         assertTrue(loginPage.checkIfLoginButtonIsPresented());
         assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
-    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testLoginPageElementsVerification")
+    @Test(groups = { "Login Negative Tests Group" }, priority = 2)
     public void testSignInNegativePassword() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage
+                .cleanUserNameField()
+                .cleanPasswordField()
                 .typeUserName(Credentials.USERNAME)
                 .typePassword(Credentials.PASSWORD_WRONG)
                 .waitForLoginButtonEnabled(2);
 
         assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
-        assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
+        assertEquals("User authentication failed", loginPage.getErrorMessageTest());
     }
 
-    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testSignInNegativePassword")
+    @Test(groups = { "Login Negative Tests Group" }, priority = 3)
     public void testSignInNegativeUserName() {
         LoginPage loginPage = new LoginPage(driver);
-
-        // This assertion checks that user name field value still present in field after previous test execution
-        assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME);
 
         loginPage
                 .cleanUserNameField()
@@ -56,30 +54,25 @@ public class LogInTests extends BaseTestTemplate {
 
         assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
-        assertEquals(loginPage.getErrorMessageTest(), "User authentication failed");
+        assertEquals("User authentication failed", loginPage.getErrorMessageTest());
     }
 
-    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testSignInNegativeUserName")
+    @Test(groups = { "Login Positive Tests Group" }, priority = 4)
     public void testDisableLogInButtonOption() {
         LoginPage loginPage = new LoginPage(driver);
-
-        // This assertion checks that user name field value still present in field after previous test execution
-        assertEquals(loginPage.getUserNameFieldText(), Credentials.USERNAME_WRONG);
 
         loginPage
                 .cleanUserNameField()
                 .cleanPasswordField();
 
-        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresented());
+        assertTrue(loginPage.checkIfSpecifyCredentialsMessageIsPresent());
         assertTrue(loginPage.checkIfLogInButtonIsDisabled());
     }
 
-    @Test(groups = { "Login Tests Group" }, dependsOnMethods = "testDisableLogInButtonOption")
+    @Test(groups = { "Login Positive Tests Group" }, priority = 5)
     public void testSignInPositiveAction() {
         LoginPage loginPage = new LoginPage(driver);
         NavigationBarModule navigationBar = new NavigationBarModule(driver);
-
-        assertEquals(loginPage.getUserNameFieldText(), "");
 
         loginPage
                 .cleanUserNameField()
@@ -90,6 +83,7 @@ public class LogInTests extends BaseTestTemplate {
 
         assertTrue(loginPage.checkIfLogInButtonEnabled());
         loginPage.clickOnLoginButton();
-        Assert.assertTrue(navigationBar.isNavigationBarPresent());
+        navigationBar.waitForNavigationBarPresence(15, 250);
+        assertTrue(navigationBar.isNavigationBarPresent());
     }
 }

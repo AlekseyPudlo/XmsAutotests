@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="FireFoxTestSuite">
+<suite name="FireFoxTestSuite" verbose="10" preserve-order="true"> <!--thread-count="1" parallel="tests"-->
     <parameter name="browser" value="firefox"/>
-    <test name="FireFox Test">
+    <test name="FireFox LogIn Tests">
+        <groups>
+            <run>
+                <include name="Login Positive Tests Group"/>
+                <include name="Login Negative Tests Group"/>
+            </run>
+        </groups>
         <classes>
-          <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests">
-            <!--<methods>-->
-                <!--<include name="logInLogOutTest" />-->
-            <!--</methods>-->
-          </class>
+            <class name="com.xio.dellemc.automation.testcases.logintests.LogInTests"/>
+            <!--<methods>
+                <include name="" />
+            </methods>-->
+        </classes>
+    </test>
+    <test name="FireFox NAS Settings Test">
+        <groups>
+            <run>
+                <include name="NAS Settings Tests Group"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.xio.dellemc.automation.testcases.settingstests.NasSettingsTests"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
