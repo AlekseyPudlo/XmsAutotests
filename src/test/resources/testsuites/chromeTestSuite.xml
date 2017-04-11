@@ -6,8 +6,8 @@
     <test name="Chrome LogIn Tests">
         <groups>
             <run>
-                <exclude name="Login Positive Tests Group"/>
-                <exclude name="Login Negative Tests Group"/>
+                <include name="Login Positive Tests Group"/>
+                <include name="Login Negative Tests Group"/>
             </run>
         </groups>
         <classes>

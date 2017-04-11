@@ -30,6 +30,7 @@ public class CommonExpectedConditions {
         };
     }
 
+    // An expectation for checking if the given text is NOT present in the specified element
     public static ExpectedCondition<Boolean> textToBeNotPresentInElement(final WebElement givenElement, final String text) {
 
         return new ExpectedCondition<Boolean>() {
@@ -60,6 +61,7 @@ public class CommonExpectedConditions {
         };
     }
 
+    // An expectation for checking if the given text is present in the specified element
     public static ExpectedCondition<Boolean> textToBePresentInElement(final WebElement givenElement, final String text) {
         return new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {

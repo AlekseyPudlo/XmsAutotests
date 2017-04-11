@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class NavigationBarModule extends BasePageObject {
 
+    //  Not the best but temporary solution, should be replaced to a config file
     private By navigationToolBar_Locator = By.xpath("/html/body/nav-toolbar[1]/div[1]");
     private By sysLogo_Locator = By.xpath("html/body/nav-toolbar/div/a");
     private By searchItem_Locator = By.xpath("html/body/nav-toolbar/div/div/navtoolbar-search");
@@ -26,16 +27,19 @@ public class NavigationBarModule extends BasePageObject {
         super(driver);
     }
 
+    //  Waits while System Settings Context window apears
     public NavigationBarModule waitForSystemSettingsContext(int timeout) {
         wait.forElementClickable(systemSettingsContext_Locator, timeout);
         return this;
     }
 
+    //  Click on System Settings Bttn to open System Settings Context window
     public NavigationBarModule callingSystemSettingsContext() {
         clickOnElement(systemSettingsMenuItem_Locator);
         return this;
     }
 
+    //  Click on Nas Settings bttn if Context window appeared and open context window first if not
     public NasSettingsModule goToNasSettings() {
         waitForNavigationBarPresence(10, 250);
         if(!isSystemSettingsContextDisplayed()) {
@@ -46,6 +50,7 @@ public class NavigationBarModule extends BasePageObject {
         return new NasSettingsModule(driver);
     }
 
+    // Click on Nas Maintenance bttn if Context window appeared and open context window first if not
     public  NasMaintenanceModule goToNasMaintenance() {
         if(!isSystemSettingsContextDisplayed()) {
             callingSystemSettingsContext();
@@ -55,15 +60,18 @@ public class NavigationBarModule extends BasePageObject {
         return new NasMaintenanceModule(driver);
     }
 
+    //  Waits for Navigation Bar presence on a page
     public void waitForNavigationBarPresence(int timeout, int pooling) {
         wait.forElementVisible(navigationToolBar_Locator, timeout, pooling);
     }
 
+    //  Returns true if Navigation Bar present on a page
     public boolean isNavigationBarPresent(){
         waitForNavigationBarPresence(10, 250);
         return driver.findElement(navigationToolBar_Locator).isDisplayed();
     }
 
+    //  Checks if SystemSettings Context Window Displays
     public boolean isSystemSettingsContextDisplayed() {
         return isElementDisplayed(systemSettingsContext_Locator);
     }

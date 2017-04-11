@@ -15,9 +15,7 @@ import org.testng.log4testng.Logger;
  */
 public class BaseTestTemplate {
 
-    protected WebDriver driver;
-    private DriverProvider driverProvider;
-    Logger logger;
+    protected static WebDriver driver;
 
 /*    @Parameters({ "browser" })
     @BeforeSuite(alwaysRun = true)
@@ -36,8 +34,7 @@ public class BaseTestTemplate {
     public void beforeClass(@Optional String browser) {
         System.out.println("Browser = " + browser);
 
-        driverProvider = new DriverProvider();
-        driver = driverProvider.setDriverForBrowser(browser);
+        driver = new DriverProvider().setDriverForBrowser(browser);
 
         driver.manage().window().maximize();
         driver.get(Credentials.BASE_URL);

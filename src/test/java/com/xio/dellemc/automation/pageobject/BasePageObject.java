@@ -118,6 +118,7 @@ public class BasePageObject {
         }
     }
 
+    //  Method wrapper for webelement.click option adapted for By.locator objects
     protected void clickOnElement(By by) {
         driver.findElement(by).click();
     }
@@ -136,10 +137,12 @@ public class BasePageObject {
         wait.forXmilliseconds(timeout);
     }
 
+    //  Utility method to customise Drivers implicit wait
     private void changeImplicitWait(int value, TimeUnit timeUnit) {
         driver.manage().timeouts().implicitlyWait(value, timeUnit);
     }
 
+    //  Utility method to return implicit wait to his default state
     private void restoreDefaultImplicitWait() {
         changeImplicitWait(timeOut, TimeUnit.SECONDS);
     }

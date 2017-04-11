@@ -14,10 +14,8 @@ import org.openqa.selenium.support.ThreadGuard;
 public class DriverProvider {
     public WebDriver driver;
 
-    public DriverProvider() {}
-
+    // Throws to a method that returns a new instance of Chrome / FireFox Driver
     public WebDriver setDriverForBrowser(String browser) {
-        // Create a new instance of Chrome / FireFox Driver
         if(browser.equalsIgnoreCase("firefox")) {
             return setFireFoxBrowser();
         } else if (browser.equalsIgnoreCase("chrome")) {
@@ -26,6 +24,7 @@ public class DriverProvider {
         return null;
     }
 
+    //  Returns a new instance of FireFox Driver
     private WebDriver setFireFoxBrowser() {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, new LoggingConfiguration());
@@ -33,6 +32,7 @@ public class DriverProvider {
         return driver = ThreadGuard.protect(new FirefoxDriver(capabilities));
     }
 
+    //  Returns a new instance of chrome Driver
     private WebDriver setChromeBrowser() {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, new LoggingConfiguration());

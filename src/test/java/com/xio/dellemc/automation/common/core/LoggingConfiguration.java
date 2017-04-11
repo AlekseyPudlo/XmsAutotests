@@ -8,10 +8,13 @@ import java.util.logging.Level;
 /**
  * Created by aleks on 10.04.17.
  */
-public class LoggingConfiguration extends LoggingPreferences{
-    LoggingPreferences loggingPreferences = new LoggingPreferences();
 
-    public LoggingConfiguration() {
+class LoggingConfiguration extends LoggingPreferences {
+
+    private LoggingPreferences loggingPreferences = new LoggingPreferences();
+
+    // The class is intended to configure levels of different log types     
+    LoggingConfiguration() {
         loggingPreferences.enable(LogType.BROWSER, Level.OFF);
         loggingPreferences.enable(LogType.CLIENT, Level.SEVERE);
         loggingPreferences.enable(LogType.DRIVER, Level.WARNING);

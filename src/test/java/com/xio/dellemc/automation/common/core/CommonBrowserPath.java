@@ -11,7 +11,13 @@ import java.io.File;
 
 public class CommonBrowserPath {
 
+
     private OsValidator osValidator = new OsValidator();
+
+/*
+    There are 3 chromedriver launchers for 3 OS Windows, Linux, and MAC to make test Framework Cross-platform
+    Once the method run it calls bool methods in if / else statements and picks up the correct one
+*/
 
     public File getChromeDriverPath() {
         if(osValidator.isWindows()) {
@@ -25,6 +31,10 @@ public class CommonBrowserPath {
         }
     }
 
+/*
+    There are 3 firefox launchers for 3 OS Windows, Linux, and MAC to make test Framework Cross-platform
+    Once the method run it calls bool methods in if / else statements and picks up the correct one
+*/
     public File getFirefoxDriverPath() {
         if(osValidator.isWindows()) {
             return new File(".\\src\\test\\resources\\BrowserDrivers\\FireFoxDriver\\geecodriver_win\\geckodriver_win64.exe");

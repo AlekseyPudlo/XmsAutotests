@@ -15,6 +15,7 @@ public class OsValidator {
         System.getProperties().list(System.out);
     }
 
+    //    Boolean methods to check if the OS is Win, Linux, or Mac
     public boolean isWindows() {
         return os.indexOf("win") >= 0;
     }
