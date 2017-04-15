@@ -15,17 +15,17 @@ public class DriverProvider {
     public WebDriver driver;
 
     // Throws to a method that returns a new instance of Chrome / FireFox Driver
-    public WebDriver setDriverForBrowser(String browser) {
+    public WebDriver initDriverForBrowser(String browser) {
         if(browser.equalsIgnoreCase("firefox")) {
-            return setFireFoxBrowser();
+            return initFireFoxBrowser();
         } else if (browser.equalsIgnoreCase("chrome")) {
-            return setChromeBrowser();
+            return initChromeBrowser();
         }
         return null;
     }
 
     //  Returns a new instance of FireFox Driver
-    private WebDriver setFireFoxBrowser() {
+    private WebDriver initFireFoxBrowser() {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, new LoggingConfiguration());
         System.setProperty("webdriver.gecko.driver", new CommonBrowserPath().getFirefoxDriverPath().getAbsolutePath());
@@ -33,7 +33,7 @@ public class DriverProvider {
     }
 
     //  Returns a new instance of chrome Driver
-    private WebDriver setChromeBrowser() {
+    private WebDriver initChromeBrowser() {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(CapabilityType.LOGGING_PREFS, new LoggingConfiguration());
         System.setProperty("webdriver.chrome.driver", new CommonBrowserPath().getChromeDriverPath().getAbsolutePath());

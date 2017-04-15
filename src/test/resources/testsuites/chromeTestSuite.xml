@@ -3,6 +3,9 @@
 
 <suite name="ChromeTestSuite" verbose="10" preserve-order="true"> <!--thread-count="1" parallel="tests"-->
     <parameter name="browser" value="chrome"/>
+    <listeners>
+        <listener class-name="com.xio.dellemc.automation.common.core.CustomReportListener"/>
+    </listeners>
     <test name="Chrome LogIn Tests">
         <groups>
             <run>
